@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">mvpframework</string>
+    <string name="no_network">There is no network connection now, please try again</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+
+    <string name="permission_tip">Tip</string>
+    <string name="permission_goto_set">Go settings</string>
+    <string name="permission_no_set">Not now</string>
+
+    <string name="permission_camera"> Please "Allow Photo Access".</string>
+    <string name="permission_photo">Adding photos to your bio or sending photos need the access to the Photos.</string>
+    <string name="permission_position">Please "Allow Location Access".</string>
+    <string name="permission_voice">Microphone is needed to record sounds.</string>
+
+    <string name="login_expired_toast">User login expired,please login again.</string>
+</resources>

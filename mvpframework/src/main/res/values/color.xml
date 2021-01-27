@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorOk">#ffffff</color>
+    <color name="colorTitle">#313262</color>
+    <color name="colorCancel">#9392AC</color>
+</resources>

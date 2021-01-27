@@ -1,0 +1,2 @@
+include ':app',':mvpframework'
+rootProject.name='mvpframwork'

@@ -1,0 +1,108 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "channel"
+
+    productFlavors {
+
+        develop {
+            buildConfigField 'boolean', 'isDev', 'true'
+            dimension "channel"
+
+        }
+
+        googleplay {
+            buildConfigField 'boolean', 'isDev', 'false'
+            dimension "channel"
+
+        }
+    }
+
+    /**
+     * 三种渠道
+     * develop测试（无混淆）
+     * develop正式（混淆）
+     * googleplay正式（混淆，用于真正的提交）
+     */
+    variantFilter {
+        variant ->
+            def names = variant.flavors*.name
+            def types = variant.buildType.name
+            if (names.contains("googleplay") && types == "debug") {
+                setIgnore(true)
+            }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
+    api 'androidx.cardview:cardview:1.0.0'
+    api 'com.google.android.material:material:1.1.0'
+
+    //room
+    // add for room
+    def room_version = "2.2.2"
+    api "androidx.room:room-runtime:$room_version"
+    api "androidx.room:room-ktx:$room_version"
+    api "android.arch.persistence.room:rxjava2:1.1.1"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    //网络请求
+    api 'com.squareup.retrofit2:retrofit:2.6.2'
+    api 'com.squareup.retrofit2:converter-gson:2.6.2'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+    api 'com.squareup.okhttp3:logging-interceptor:4.5.0'
+
+    //rxJava2
+    api "io.reactivex.rxjava2:rxjava:2.2.2"
+    api "io.reactivex.rxjava2:rxandroid:2.1.0"
+    api "io.reactivex.rxjava2:rxkotlin:2.3.0"
+
+    //eventbus
+    api "org.greenrobot:eventbus:3.2.0"
+
+    //glide
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    api 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
+
+    // 毛玻璃
+    api 'jp.wasabeef:glide-transformations:3.0.1'
+}
