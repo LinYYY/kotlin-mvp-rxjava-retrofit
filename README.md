@@ -1,2 +1,2 @@
-# kotlin-mvp-rxjava-retrofit
+# kotlin+mvp+rxjava+retrofit
 kotlin+rxjava+retrofit mvp framework
